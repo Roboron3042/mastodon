@@ -1,6 +1,3 @@
 default: styles/application.scss
 contrast: styles/contrast.scss
 mastodon-light: styles/mastodon-light.scss
-cyberpunk-neon: styles/cyberpunk-neon.scss
-bird-ui: styles/bird-ui.scss
-bird-ui-light: styles/bird-ui-light.scss
