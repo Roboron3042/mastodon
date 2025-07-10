@@ -75,8 +75,8 @@ class Account < ApplicationRecord
   URL_PREFIX_RE = %r{\Ahttp(s?)://[^/]+}
   USERNAME_ONLY_RE = /\A#{USERNAME_RE}\z/i
   USERNAME_LENGTH_LIMIT = 30
-  DISPLAY_NAME_LENGTH_LIMIT = 30
-  NOTE_LENGTH_LIMIT = 500
+  DISPLAY_NAME_LENGTH_LIMIT = 100
+  NOTE_LENGTH_LIMIT = 2000
 
   AUTOMATED_ACTOR_TYPES = %w(Application Service).freeze
 
