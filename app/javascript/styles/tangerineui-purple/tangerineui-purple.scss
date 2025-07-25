@@ -8,7 +8,7 @@
 
 /* 📄 Meta */
 :root {
-    --version: "v2.4.1";
+    --version: "v2.4.4";
 
     --variant-name: "Purple";
     --variant-emoji: "\1FABB\00A0";
@@ -1237,18 +1237,20 @@ body.app-body  {
 .layout-multiple-columns .column-link .icon-list-ul {
     background-image: var(--icon-list-accent);
 }
-.app-body .navigation-panel .list-panel .column-link .icon-list-ul {
+.app-body .navigation-panel__list-panel__items .icon {
+    display: block;
+}
+.app-body .navigation-panel .navigation-panel__list-panel__items .column-link .icon {
     background-image: var(--icon-dot-accent);
     transform: scale(1.8);
 }
-.app-body .navigation-panel .list-panel .column-link.active .icon-list-ul {
+.app-body .navigation-panel .navigation-panel__list-panel__items .column-link.active .icon {
     background-image: var(--icon-dot-accent-active);
 }
 .app-body .navigation-panel .column-link .icon-list-ul {
     background-image: var(--icon-list-accent);
 }
-.app-body .navigation-panel .column-link.active .icon-list-ul,
-.app-body .navigation-panel .column-link:has(+ .list-panel > .column-link.active) .icon-list-ul {
+.app-body .navigation-panel .column-link.active .icon-list-ul {
     background-image: var(--icon-list-accent-active);
 }
 /* Settings icon */
@@ -1648,6 +1650,10 @@ body.app-body  {
 }
 .app-body .column-settings .dropdown-button {
     background-color: var(--color-accent-bg);
+}
+.app-body .dropdown-button.warning:not(.active) {
+    border-color: var(--color-reject);
+    color: var(--color-reject)
 }
 .app-body .reply-indicator {
     border-left: 1px solid var(--color-lines);
@@ -4058,6 +4064,9 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
 .app-body .navigation-panel__list-panel__header .icon-button {
     padding: 8px;
 }
+.app-body .navigation-panel__list-panel__items {
+    padding-inline-start: 0;
+}
 .app-body .ui__header__logo .logo--icon,
 .navigation-panel__list-panel__header__sep {
     display: none;
@@ -4186,7 +4195,6 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
 .app-body .column-link:not(.column-link--logo) {
     padding: 15px 5px 16px 24px;
     gap: 7px;
-    margin-left: 3px;
     border: 0;
     font-weight: 500;
     font-size: 18px;
@@ -4195,7 +4203,7 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
 }
 @media screen and (min-width:1175px) {
     .app-body .column-link:not(.column-link--logo) {
-        padding-left: 11px;
+        padding-left: 14px;
     }
 }
 .app-body .column-link--transparent:is(.active, .active:hover) {
@@ -4215,7 +4223,7 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
     }
     .app-body .column-link--transparent span::before {
         content: " ";
-        left: -52px;
+        left: -50px;
         background-color: transparent;
         transition: .3s background-color;
         top: -14px;
@@ -4371,26 +4379,16 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
     font-style: italic;
     margin: 0;
     width: 100%;
-    outline: 1px solid transparent;
+    outline: 1px solid var(--color-lines);
     outline-offset: -1px;
+    box-shadow: 2px 3px var(--color-content-secondary-bg);
     transition: all .2s;
-}
-.app-body .account__header__account-note textarea:placeholder-shown {
-    padding-left: 0;
-    padding-right: 0;
 }
 .app-body .account__header__account-note textarea:focus {
     background-color: var(--color-accent-bg);
+    outline-color: var(--color-accent);
     padding-left: 10px;
     padding-right: 10px;
-}
-.app-body .account__header__account-note textarea:not(:placeholder-shown):not(:focus) {
-    outline-color: var(--color-lines);
-    box-shadow: 2px 3px var(--color-content-secondary-bg);
-}
-.app-body .account__header__account-note textarea:not(:placeholder-shown):focus {
-    outline-color: var(--color-accent);
-    box-shadow: 2px 3px var(--color-accent-bg);
 }
 .app-body .account__header__badges .account-role {
     color: var(--color-content-fg);
@@ -6468,11 +6466,6 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
     border: 0;
     outline: 1px solid var(--color-lines-translucent);
 }
-@media screen and (max-width:1175px) {
-    .app-body .modal-root__modal:not(.media-modal) {
-        margin-top: unset;
-    }
-}
 .app-body .compare-history-modal {
     background-color: var(--color-content-bg);
     color: var(--color-content-fg);
@@ -6550,6 +6543,14 @@ div[tabindex="-1"] + div[tabindex="-1"] > .status__wrapper > .status-reply.statu
 }
 .app-body .actions-modal {
     background-color: var(--color-content-bg);
+}
+.app-body .actions-modal :is(a, button) {
+    color: var(--color-content-fg);
+}
+.app-body .actions-modal a:is(:hover, :active, :focus),
+.app-body .actions-modal button:is(:hover, button:active, button:focus) {
+    background-color: var(--color-accent);
+    color: var(--color-accent-fg);
 }
 .app-body .interaction-modal {
     background-color: var(--color-content-bg);
@@ -7234,12 +7235,8 @@ a:is(.active,
 }
 @media screen and (max-width:1175px) {
     .app-body .announcements {
-        box-shadow: none;
-        margin-top: 1px;
         border-left: 0;
         border-right: 0;
-        margin-inline-start: -45px;
-        margin-inline-end: -55px;
     }
     .app-body .announcements__mastodon {
         border-radius: 0;

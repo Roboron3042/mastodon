@@ -50,7 +50,7 @@ echo -e "@use 'application';\n@use 'mastodon-bird-ui/layout-single-column.scss';
 
 
 # tangerine
-TANGERINE_VERSION="2.4.1"
+TANGERINE_VERSION="2.4.4"
 cd /home/mastodon/estilos/TangerineUI-for-Mastodon
 git checkout main
 git pull --rebase
